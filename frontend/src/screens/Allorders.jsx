@@ -18,19 +18,19 @@ function AllOrders() {
 
   const getdata=async()=>{
     if(id==="confirmed"){
-      const res=await axios.get("https://pro-shop-ecommerce-backend.onrender.com/api/orders/allorders/confirmed")
+      const res=await axios.get("https://pro-shop-backend.vercel.app/api/orders/allorders/confirmed")
       if(res.data.success===true){
           setdata(res.data.message)
       }
     }
     else if(id==="shipped"){
-      const res=await axios.get("https://pro-shop-ecommerce-backend.onrender.com/api/orders/allorders/shipped")
+      const res=await axios.get("https://pro-shop-backend.vercel.app/api/orders/allorders/shipped")
       console.log(res)
       if(res.data.success===true){
           setdata(res.data.message)
       }
     }else if(id==="delievered"){
-      const res=await axios.get("https://pro-shop-ecommerce-backend.onrender.com/api/orders/allorders/delievered")
+      const res=await axios.get("https://pro-shop-backend.vercel.app/api/orders/allorders/delievered")
       if(res.data.success===true){
           setdata(res.data.message)
       }

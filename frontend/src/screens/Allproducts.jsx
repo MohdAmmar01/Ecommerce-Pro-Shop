@@ -10,7 +10,7 @@ function Allproducts() {
   const navigate=useNavigate()
 
   const getdata=async()=>{
-    const res=await axios.get("https://pro-shop-ecommerce-backend.onrender.com/api/products")
+    const res=await axios.get("https://pro-shop-backend.vercel.app/api/products")
     if(res.data.success===true){
         setdata(res.data.message)
     }
@@ -19,7 +19,7 @@ function Allproducts() {
 getdata()
   },[])
   const deletehandler=async(elem)=>{
-  const res= await axios.delete(`https://pro-shop-ecommerce-backend.onrender.com/api/products/${elem._id}`)
+  const res= await axios.delete(`https://pro-shop-backend.vercel.app/api/products/${elem._id}`)
     if(res.data.success===true){
       toast.success("Product Deleted", {
         'position': 'bottom-right',

@@ -12,7 +12,7 @@ function Verify() {
     const navigate=useNavigate()
     const dispatch=useDispatch()
     const verify=async()=>{
-        const res=await axios.post (`https://pro-shop-ecommerce-backend.onrender.com/api/users/verify`,{code:id})
+        const res=await axios.post (`https://pro-shop-backend.vercel.app/api/users/verify`,{code:id})
         console.log(res)
         if(res.data.success===true){
             dispatch(setisLoggedin(true))

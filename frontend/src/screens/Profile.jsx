@@ -45,7 +45,7 @@ function Profile() {
       try{
         setloading(true)
 
-        const res=await axios.put("https://pro-shop-ecommerce-backend.onrender.com/api/users/profile",{password,name});
+        const res=await axios.put("https://pro-shop-backend.vercel.app/api/users/profile",{password,name});
        setloading(false)
         if(res.data.success===true){
          dispatch(setdata(res.data.message))
@@ -66,7 +66,7 @@ function Profile() {
   }
 
   const getdata=async()=>{
-    const res=await axios.get("https://pro-shop-ecommerce-backend.onrender.com/api/orders/myorders")
+    const res=await axios.get("https://pro-shop-backend.vercel.app/api/orders/myorders")
     if(res.data.success===true){
       dispatch(setuserorders(res.data.message))
     }

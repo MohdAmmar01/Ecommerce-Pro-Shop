@@ -17,7 +17,7 @@ function Order() {
     const [sdk,setsdk]=useState(false)
     const navigate=useNavigate()
     const getdata=async()=>{
-        const res=await axios.get(`https://pro-shop-ecommerce-backend.onrender.com/api/orders/${id}`);
+        const res=await axios.get(`https://pro-shop-backend.vercel.app/api/orders/${id}`);
       setdata(res.data.message)
 
       if(data?.isPaid!==true){
@@ -32,7 +32,7 @@ function Order() {
        
     }
     const cancelorder=async()=>{
-        const res=await axios.delete(`https://pro-shop-ecommerce-backend.onrender.com/api/orders/cancel/${id}`);
+        const res=await axios.delete(`https://pro-shop-backend.vercel.app/api/orders/cancel/${id}`);
         if(res.data.success===true){ 
            toast.success("Order Cancelled   ",{
           position:"bottom-right",
@@ -48,7 +48,7 @@ function Order() {
         }
     }
     const addPaypalScript=async()=>{
-      const {data:clientId}=await axios.get("https://pro-shop-ecommerce-backend.onrender.com/api/config/paypal")
+      const {data:clientId}=await axios.get("https://pro-shop-backend.vercel.app/api/config/paypal")
       const script=document.createElement("script")
       script.type="text/javascript"
       script.src=`https://www.paypal.com/sdk/js?client-id=${clientId}`
@@ -67,7 +67,7 @@ function Order() {
    
     },[id])
     const getdollar=async()=>{
-      const {data:convert_API}=await axios.get("https://pro-shop-ecommerce-backend.onrender.com/api/config/exchange")
+      const {data:convert_API}=await axios.get("https://pro-shop-backend.vercel.app/api/config/exchange")
       if(convert_API){
         let myHeaders = new Headers();
         
@@ -100,7 +100,7 @@ function Order() {
 
     }
     const shippedhandler=async()=>{
-      const res=await axios.put(`https://pro-shop-ecommerce-backend.onrender.com/api/orders/${data._id}/shipped`)
+      const res=await axios.put(`https://pro-shop-backend.vercel.app/api/orders/${data._id}/shipped`)
       if(res.data.success===true){
         toast.success("Order Shipped ",{
           position:"bottom-right",
@@ -115,7 +115,7 @@ function Order() {
       }
     }
     const dilieveredhandler=async()=>{
-      const res=await axios.put(`https://pro-shop-ecommerce-backend.onrender.com/api/orders/${data._id}/deliver`)
+      const res=await axios.put(`https://pro-shop-backend.vercel.app/api/orders/${data._id}/deliver`)
       if(res.data.success===true){
         toast.success("Order Delievered ",{
           position:"bottom-right",
@@ -130,7 +130,7 @@ function Order() {
       }
     }
     const paymentsuccesshandler=async(paymentResult)=>{
- const res=await axios.put(`https://pro-shop-ecommerce-backend.onrender.com/api/orders/${data._id}/pay`,paymentResult)
+ const res=await axios.put(`https://pro-shop-backend.vercel.app/api/orders/${data._id}/pay`,paymentResult)
   getdata()
 }
   return (

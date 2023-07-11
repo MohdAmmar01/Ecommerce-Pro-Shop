@@ -13,7 +13,7 @@ function Home() {
 
   const getproducts=async()=>{
     console.log(products)
-    const res=await axios.get("https://pro-shop-ecommerce-backend.onrender.com/api/products");
+    const res=await axios.get("https://pro-shop-backend.vercel.app/api/products");
     dispatch(setdata(res.data.message))
   }
   useEffect(()=>{

@@ -52,7 +52,7 @@ function Register() {
      
       try{
         setloading(true)
-        const res=await axios.post("https://pro-shop-ecommerce-backend.onrender.com/api/users",{email,password,name});
+        const res=await axios.post("https://pro-shop-backend.vercel.app/api/users",{email,password,name});
        setloading(false)
 
         if(res.data.success===true){

@@ -21,7 +21,7 @@ function Product() {
    const dispatch=useDispatch()
 
     const getdata=async()=>{
-     const res=await axios.get(`https://pro-shop-ecommerce-backend.onrender.com/api/products/${id}`)
+     const res=await axios.get(`https://pro-shop-backend.vercel.app/api/products/${id}`)
      setdata(res.data.message)
 
     }
@@ -48,7 +48,7 @@ function Product() {
       e.preventDefault()
       const v = validate() 
       if (v) {
-        await axios.post(`https://pro-shop-ecommerce-backend.onrender.com/api/products/${data._id}/reviews`,{rating,comment})
+        await axios.post(`https://pro-shop-backend.vercel.app/api/products/${data._id}/reviews`,{rating,comment})
         getdata()
       }
     }

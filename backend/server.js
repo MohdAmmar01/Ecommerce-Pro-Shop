@@ -15,7 +15,7 @@ connectDB()
 const app = express()
 
 
-app.use(cors({origin:"https://pro-shop-ecommerce.onrender.com",credentials:true}))
+app.use(cors({origin:"https://chatting-club.vercel.app",credentials:true}))
 app.use(express.json())
 app.use(cp())
 app.use('/api/products', productRoutes)

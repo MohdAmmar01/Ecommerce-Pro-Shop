@@ -7,7 +7,7 @@ import { ToastContainer,toast } from 'react-toastify'
 function Allusers() {
   const [data,setdata]=useState(null)
   const getdata=async()=>{
-    const res=await axios.get("https://pro-shop-ecommerce-backend.onrender.com/api/users")
+    const res=await axios.get("https://pro-shop-backend.vercel.app/api/users")
     if(res.data.success===true){
         setdata(res.data.message)
     }
@@ -16,7 +16,7 @@ function Allusers() {
 getdata()
   },[])
   const deletehandler=async(elem)=>{
-  const res= await axios.delete(`https://pro-shop-ecommerce-backend.onrender.com/api/users/${elem._id}`)
+  const res= await axios.delete(`https://pro-shop-backend.vercel.app/api/users/${elem._id}`)
     if(res.data.success===true){
       toast.success("User Deleted", {
         'position': 'bottom-right',
@@ -32,7 +32,7 @@ getdata()
     }
   }
   const makeadmin=async(elem)=>{
-  const res= await axios.put(`https://pro-shop-ecommerce-backend.onrender.com/api/users/${elem._id}`,{isAdmin:true})
+  const res= await axios.put(`https://pro-shop-backend.vercel.app/api/users/${elem._id}`,{isAdmin:true})
     if(res.data.success===true){
       toast.success("User Become Admin Now", {
         'position': 'bottom-right',

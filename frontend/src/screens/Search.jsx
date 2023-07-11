@@ -14,7 +14,7 @@ function Search() {
 
 
   const getproducts=async()=>{
-    const res=await axios.get(`https://pro-shop-ecommerce-backend.onrender.com/api/products/search/${id}`);
+    const res=await axios.get(`https://pro-shop-backend.vercel.app/api/products/search/${id}`);
  if(res.data.success===true){
     setdata(res.data.message)
  }else{

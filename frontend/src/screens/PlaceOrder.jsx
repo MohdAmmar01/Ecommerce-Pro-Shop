@@ -42,7 +42,7 @@ function PlaceOrder() {
       shippingPrice:shipping,
       totalPrice:cart.price+Number(shipping)
     }
-    const res=await axios.post("https://pro-shop-ecommerce-backend.onrender.com/api/orders",data)
+    const res=await axios.post("https://pro-shop-backend.vercel.app/api/orders",data)
    if(res.data.success===true){
     toast.success("Order Placed",{
       position:"bottom-right",

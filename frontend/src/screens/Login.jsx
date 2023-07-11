@@ -54,7 +54,7 @@ function Login() {
         if (v) {
             try{
                 setloading(true)
-                const res=await axios.post("https://pro-shop-ecommerce-backend.onrender.com/api/users/login",{email,password});
+                const res=await axios.post("https://pro-shop-backend.vercel.app/api/users/login",{email,password});
                setloading(false)
              
                 if(res.data.success===true){

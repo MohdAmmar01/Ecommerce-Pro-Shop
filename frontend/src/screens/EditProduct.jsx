@@ -77,7 +77,7 @@ function EditProduct() {
        
         try{
           setloading(true)
-          const res=await axios.post(`https://pro-shop-ecommerce-backend.onrender.com/api/products/${id}`,{name,image,brand,countInStock,price,category,description});
+          const res=await axios.post(`https://pro-shop-backend.vercel.app/api/products/${id}`,{name,image,brand,countInStock,price,category,description});
           console.log(res)
          setloading(false)
   
