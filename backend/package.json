@@ -2,10 +2,10 @@
   "name": "proshop",
   "version": "1.0.0",
   "description": "MERN shopping cart app",
-  "main": "server.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon server",
+    "start": "nodemon index.js",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d"
   },
