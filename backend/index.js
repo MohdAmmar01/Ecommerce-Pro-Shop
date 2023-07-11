@@ -4,9 +4,9 @@ const  { errorHandler } =require( './middleware/errorMiddleware.js')
 const  connectDB =require( './config/db.js')
 const  cp =require( "cookie-parser")
 const  cors =require( "cors")
-const  productRoutes =require( './src/routes/productRoutes.js')
-const  userRoutes =require( './src/routes/userRoutes.js')
-const  orderRoutes =require( './src/routes/orderRoutes.js')
+const  productRoutes =require( './routes/productRoutes.js')
+const  userRoutes =require( './routes/userRoutes.js')
+const  orderRoutes =require( './routes/orderRoutes.js')
 
 dotenv.config()
 

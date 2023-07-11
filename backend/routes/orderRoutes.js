@@ -9,8 +9,8 @@ const  {
   getOrders,
   updateOrderToShipped,
   cancelOrder,
-} =reuire( '../controllers/orderController.js')
-const  { protect, admin } =require( '../../middleware/authMiddleware.js')
+} =require( '../controllers/orderController.js')
+const  { protect, admin } =require( '../middleware/authMiddleware.js')
 
 
 router.route('/').post(protect, addOrderItems)
@@ -22,4 +22,4 @@ router.route('/:id/pay').put(protect, updateOrderToPaid)
 router.route('/:id/deliver').put(protect, admin, updateOrderToDelivered)
 router.route('/:id/shipped').put(protect, admin, updateOrderToShipped)
 
-export default router
+module.exports= router

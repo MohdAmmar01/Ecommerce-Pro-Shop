@@ -1,5 +1,5 @@
 const  asyncHandler  =require('express-async-handler')
-const  OrderConfirmEmail  =require('../../utils/OrderConfirmEmail.js')
+const  OrderConfirmEmail  =require('../utils/OrderConfirmEmail.js')
 const  Order  =require('../models/orderModel.js')
 const  Product  =require('../models/productModel.js')
 

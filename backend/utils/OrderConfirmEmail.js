@@ -24,4 +24,4 @@ transporter.sendMail(mailOptions, function(error, info){
   }
 });
 }
-export default OrderConfirmEmail;
+module.exports= OrderConfirmEmail;

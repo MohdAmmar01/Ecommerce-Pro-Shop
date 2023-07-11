@@ -3,7 +3,7 @@ const User =require( "../models/userModel.js")
 const bcrypt =require( "bcryptjs")
 const jwt =require( "jsonwebtoken")
 const Order =require( "../models/orderModel.js")
-const sendEmail =require( "../../utils/sendemail.js")
+const sendEmail =require( "../utils/VerifyEmail.js")
 const crypto =require( "crypto")
 // @desc    Auth user & get token
 // @route   POST /api/users/login

@@ -21,4 +21,4 @@ const sendEmail=async(email,data)=>{
         } 
        });
 }
-export default sendEmail;
+module.exports= sendEmail;

@@ -13,7 +13,7 @@ const {
   logout,
   verifyEmail
 } =require( '../controllers/userController.js')
-const  { protect, admin } =require( '../../middleware/authMiddleware.js')
+const  { protect, admin } =require( '../middleware/authMiddleware.js')
 
 router.route('/').post(registerUser).get(protect, admin, getUsers)
 router.post('/login', authUser)
@@ -30,4 +30,4 @@ router
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUser)
 
-export default router
+module.exports= router
