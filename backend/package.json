@@ -6,11 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "nodemon server",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d"
   },
-  "author": "Brad Traversy",
+  "author": "Mohd Ammar",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",

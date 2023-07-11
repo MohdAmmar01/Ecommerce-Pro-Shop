@@ -15,7 +15,7 @@ connectDB()
 const app = express()
 
 
-app.use(cors({origin:"https://chatting-club.vercel.app",credentials:true}))
+app.use(cors({origin:"https://pro-shop-frontend.vercel.app",credentials:true}))
 app.use(express.json())
 app.use(cp())
 app.use('/api/products', productRoutes)
@@ -38,6 +38,6 @@ app.use(errorHandler)
 const PORT = process.env.PORT || 8000
 
 app.listen(
-  8000,
+  PORT,
   console.log("Server running on port 8000")
 )
