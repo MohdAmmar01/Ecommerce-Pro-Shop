@@ -1,6 +1,7 @@
-import express from 'express'
+const  express =require( 'express')
+
 const router = express.Router()
-import {
+const  {
   getProducts,
   getProductById,
   deleteProduct,
@@ -9,8 +10,8 @@ import {
   createProductReview,
   getTopProducts,
   searchedProducts,
-} from '../controllers/productController.js'
-import { protect, admin } from '../../middleware/authMiddleware.js'
+} =require( '../controllers/productController.js')
+const { protect, admin } =require( '../../middleware/authMiddleware.js')
 
 router.route('/').get(getProducts).post(protect, admin, createProduct)
 router.route('/:id/reviews').post(protect, createProductReview)

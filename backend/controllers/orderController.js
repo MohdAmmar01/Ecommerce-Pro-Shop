@@ -1,7 +1,7 @@
-import asyncHandler from 'express-async-handler'
-import OrderConfirmEmail from '../../utils/OrderConfirmEmail.js'
-import Order from '../models/orderModel.js'
-import Product from '../models/productModel.js'
+const  asyncHandler  =require('express-async-handler')
+const  OrderConfirmEmail  =require('../../utils/OrderConfirmEmail.js')
+const  Order  =require('../models/orderModel.js')
+const  Product  =require('../models/productModel.js')
 
 // @desc    Create new order
 // @route   POST /api/orders
@@ -156,7 +156,7 @@ const getOrders = asyncHandler(async (req, res) => {
   res.json({"success":true,"message":orders})
 })
 
-export {
+module.exports= {
   addOrderItems,
   getOrderById,
   updateOrderToPaid,

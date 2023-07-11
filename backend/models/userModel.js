@@ -1,6 +1,5 @@
-import mongoose from 'mongoose'
-import bcrypt from 'bcryptjs'
-import { text } from 'express'
+const  mongoose =require('mongoose')
+
 
 const userSchema = mongoose.Schema(
   {

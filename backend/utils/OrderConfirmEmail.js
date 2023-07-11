@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer"
+const nodemailer =require( "nodemailer")
 const OrderConfirmEmail=(data)=>{
 
 var transporter = nodemailer.createTransport({

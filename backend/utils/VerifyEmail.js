@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer"
+const nodemailer =require( "nodemailer")
 const sendEmail=async(email,data)=>{
     var transporter = nodemailer.createTransport({
         service: 'gmail',

@@ -1,6 +1,6 @@
-import asyncHandler from 'express-async-handler'
-import Order from '../models/orderModel.js'
-import Product from '../models/productModel.js'
+const  asyncHandler =require( 'express-async-handler')
+const  Order =require( '../models/orderModel.js')
+const  Product =require( '../models/productModel.js')
 
 // @desc    Fetch all products
 // @route   GET /api/products
@@ -165,7 +165,7 @@ const getTopProducts = asyncHandler(async (req, res) => {
   res.status(200).json({"success":true,"message":products})
 })
 
-export {
+module.exports= {
   getProducts,
   getProductById,
   deleteProduct,

@@ -1,12 +1,12 @@
-import express from 'express'
-import dotenv from 'dotenv'
-import { errorHandler } from './middleware/errorMiddleware.js'
-import connectDB from './config/db.js'
-import cp from "cookie-parser"
-import cors from "cors"
-import productRoutes from './src/routes/productRoutes.js'
-import userRoutes from './src/routes/userRoutes.js'
-import orderRoutes from './src/routes/orderRoutes.js'
+const  express =require( 'express')
+const  dotenv =require( 'dotenv')
+const  { errorHandler } =require( './middleware/errorMiddleware.js')
+const  connectDB =require( './config/db.js')
+const  cp =require( "cookie-parser")
+const  cors =require( "cors")
+const  productRoutes =require( './src/routes/productRoutes.js')
+const  userRoutes =require( './src/routes/userRoutes.js')
+const  orderRoutes =require( './src/routes/orderRoutes.js')
 
 dotenv.config()
 

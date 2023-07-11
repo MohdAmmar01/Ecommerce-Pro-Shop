@@ -1,6 +1,6 @@
-import express from 'express'
+const  express =require( 'express')
 const router = express.Router()
-import {
+const  {
   addOrderItems,
   getOrderById,
   updateOrderToPaid,
@@ -9,8 +9,8 @@ import {
   getOrders,
   updateOrderToShipped,
   cancelOrder,
-} from '../controllers/orderController.js'
-import { protect, admin } from '../../middleware/authMiddleware.js'
+} =reuire( '../controllers/orderController.js')
+const  { protect, admin } =require( '../../middleware/authMiddleware.js')
 
 
 router.route('/').post(protect, addOrderItems)

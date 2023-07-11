@@ -1,10 +1,10 @@
-import asyncHandler from "express-async-handler";
-import User from "../models/userModel.js";
-import bcrypt from "bcryptjs"
-import jwt from "jsonwebtoken"
-import Order from "../models/orderModel.js";
-import sendEmail from "../../utils/sendemail.js";
-import crypto from "crypto"
+const asyncHandler =require( "express-async-handler")
+const User =require( "../models/userModel.js")
+const bcrypt =require( "bcryptjs")
+const jwt =require( "jsonwebtoken")
+const Order =require( "../models/orderModel.js")
+const sendEmail =require( "../../utils/sendemail.js")
+const crypto =require( "crypto")
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 // @access  Public
@@ -210,7 +210,7 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 });
 
-export {
+module.exports= {
   authUser,
   registerUser,
   getUserProfile,

@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken'
-import asyncHandler from 'express-async-handler'
-import User from '../src/models/userModel.js'
+const  jwt =require( 'jsonwebtoken')
+const  asyncHandler =require( 'express-async-handler')
+const  User =require( '../src/models/userModel.js')
 
 const protect = asyncHandler(async (req, res, next) => {
   const cookie=req.cookies.token;
@@ -28,4 +28,4 @@ const admin = (req, res, next) => {
   }
 }
 
-export { protect, admin }
+module.exports= { protect, admin }
