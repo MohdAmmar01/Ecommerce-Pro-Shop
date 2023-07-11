@@ -1,0 +1,40 @@
+import mongoose from 'mongoose'
+import bcrypt from 'bcryptjs'
+import { text } from 'express'
+
+const userSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    isAdmin: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    isVerified:{
+      type:Boolean,
+      default:false
+    },
+    VerficationCode:{
+      type:String,
+    }
+  },
+  {
+    timestamps: true,
+  }
+)
+
+const User = mongoose.model('User', userSchema)
+
+export default User
