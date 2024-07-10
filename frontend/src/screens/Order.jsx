@@ -9,122 +9,80 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer,toast } from 'react-toastify'
 import { PayPalButton } from 'react-paypal-button-v2'
 function Order() {
-    const {users}=useSelector((state)=>{return state})
-    const [data,setdata]=useState(null)
-  const [dollar,setdollar]=useState(null)
+  const { users } = useSelector((state) => state);
+  const [data, setData] = useState(null);
+  const [dollar, setDollar] = useState(null);
+  const { id } = useParams();
+  const [sdk, setSdk] = useState(false);
+  const navigate = useNavigate();
 
-    const {id}=useParams()
-    const [sdk,setsdk]=useState(false)
-    const navigate=useNavigate()
-    const getdata=async()=>{
-        const res=await axios.get(`https://pro-shop-backend.vercel.app/api/orders/${id}`);
-      setdata(res.data.message)
+  const getData = async () => {
+      const res = await axios.get(`https://pro-shop-backend.vercel.app/api/orders/${id}`);
+      setData(res.data.message);
 
-      if(data?.isPaid!==true){
-        if(!window.paypal){
-          addPaypalScript()
-        }else{
-          setsdk(true)
-        }
-       }
-    
+      if (res.data.message.isPaid !== true) {
+          if (!window.paypal) {
+              addPaypalScript();
+          } else {
+              setSdk(true);
+          }
+      }
+  };
 
-       
-    }
-    const cancelorder=async()=>{
-        const res=await axios.delete(`https://pro-shop-backend.vercel.app/api/orders/cancel/${id}`);
-        if(res.data.success===true){ 
-           toast.success("Order Cancelled   ",{
-          position:"bottom-right",
-          "theme":"colored"
-        })
-        navigate("/myprofile")
-        }
-        else{
-          toast.error("some error occured ",{
-            position:"bottom-right",
-            "theme":"colored"
-          })
-        }
-    }
-    const addPaypalScript=async()=>{
-      const {data:clientId}=await axios.get("https://pro-shop-backend.vercel.app/api/config/paypal")
-      const script=document.createElement("script")
-      script.type="text/javascript"
-      script.src=`https://www.paypal.com/sdk/js?client-id=${clientId}`
-      script.async=true;
-      script.onload=()=>{
-        setsdk(true)
+  const cancelOrder = async () => {
+      const res = await axios.delete(`https://pro-shop-backend.vercel.app/api/orders/cancel/${id}`);
+      if (res.data.success === true) {
+          toast.success("Order Cancelled", { position: "bottom-right", theme: "colored" });
+          navigate("/myprofile");
+      } else {
+          toast.error("Some error occurred", { position: "bottom-right", theme: "colored" });
       }
-      document.body.appendChild(script)
-    }
-    useEffect(()=>{
-       
-     getdata()
-     if(data!==null && data.user._id!==users.userdata._id){
-        navigate("/")
-     }
-   
-    },[id])
-    const getdollar=async()=>{
-      try{
-        if(data!==null && data?.totalPrice){
-      const {data:resp}=await axios.post("https://pro-shop-backend.vercel.app/api/config/exchange",{amount:data?.totalPrice})
-      if( resp.success===true){
-           setdollar(Number((resp.message)))
-    
-      }else{
-        toast.error("something went wrong",{position:"bottom-right",theme:"colored"})
-      }
-    }
-    }
-  catch(error){
-    toast.error("something went wrong",{position:"bottom-right",theme:"colored"}
+  };
 
-    );
-            }
+  const addPaypalScript = async () => {
+      const { data: clientId } = await axios.get("https://pro-shop-backend.vercel.app/api/config/paypal");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.async = true;
+      script.onload = () => {
+          setSdk(true);
+      };
+      document.body.appendChild(script);
+  };
+
+  useEffect(() => {
+      getData();
+      if (data !== null && data.user._id !== users.userdata._id) {
+          navigate("/");
       }
-     
-    useEffect(()=>{
-      if(data!==null && dollar==null){
-        getdollar()
+  }, [id, users.userdata._id]);
+
+  const getDollar = async () => {
+      try {
+          if (data !== null && data.totalPrice) {
+              const { data: resp } = await axios.post("https://pro-shop-backend.vercel.app/api/config/exchange", { amount: data.totalPrice });
+              if (resp.success === true) {
+                  setDollar(Number(resp.message));
+              } else {
+                  toast.error("Something went wrong", { position: "bottom-right", theme: "colored" });
+              }
+          }
+      } catch (error) {
+          toast.error("Something went wrong", { position: "bottom-right", theme: "colored" });
       }
-    },[data])
- 
-    const shippedhandler=async()=>{
-      const res=await axios.put(`https://pro-shop-backend.vercel.app/api/orders/${data._id}/shipped`)
-      if(res.data.success===true){
-        toast.success("Order Shipped ",{
-          position:"bottom-right",
-          "theme":"colored"
-        })
-        getdata()
-      }else{
-        toast.error("some error occured ",{
-          position:"bottom-right",
-          "theme":"colored"
-        })
+  };
+
+  useEffect(() => {
+      if (data !== null && dollar === null) {
+          getDollar();
       }
-    }
-    const dilieveredhandler=async()=>{
-      const res=await axios.put(`https://pro-shop-backend.vercel.app/api/orders/${data._id}/deliver`)
-      if(res.data.success===true){
-        toast.success("Order Delievered ",{
-          position:"bottom-right",
-          "theme":"colored"
-        })
-        getdata()
-      }else{
-        toast.error("some error occured ",{
-          position:"bottom-right",
-          "theme":"colored"
-        })
-      }
-    }
-    const paymentsuccesshandler=async(paymentResult)=>{
- const res=await axios.put(`https://pro-shop-backend.vercel.app/api/orders/${data._id}/pay`,paymentResult)
-  getdata()
-}
+  }, [data]);
+
+  const paymentSuccessHandler = async (paymentResult) => {
+      const res = await axios.put(`https://pro-shop-backend.vercel.app/api/orders/${data._id}/pay`, paymentResult);
+      getData();
+  };
   return (
     <div>
         <Navbar />
@@ -180,7 +138,10 @@ function Order() {
                  maximumFractionDigits:2
                 }).format(data.totalPrice)}
             </h2>
-            {data.isPaid===false && data.user._id===users.userdata._id && sdk===true && dollar!==null && dollar!=="undefined"?<PayPalButton amount={dollar} onSuccess={paymentsuccesshandler}/>:null}
+            {data.isPaid === false && data.user._id === users.userdata._id && sdk === true && dollar !== null && dollar !== "undefined" ? (
+                        <PayPalButton amount={dollar} onSuccess={paymentSuccessHandler} />
+                    ) : null}
+
            {
             users.userdata.isAdmin===true?
             <div>
