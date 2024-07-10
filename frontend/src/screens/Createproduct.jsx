@@ -77,7 +77,6 @@ function Createproduct() {
         try{
           setloading(true)
           const res=await axios.post("https://pro-shop-backend.vercel.app/api/products",{name,image,brand,countInStock,price,category,description});
-          console.log(res)
          setloading(false)
   
           if(res.data.success===true){

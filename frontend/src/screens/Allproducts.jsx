@@ -35,7 +35,6 @@ getdata()
     }
   }
   const editproduct=async(elem)=>{
-    console.log(elem)
      navigate(`/admin/editproduct/${elem._id}`)
   }
   return (

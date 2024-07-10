@@ -25,7 +25,6 @@ function AllOrders() {
     }
     else if(id==="shipped"){
       const res=await axios.get("https://pro-shop-backend.vercel.app/api/orders/allorders/shipped")
-      console.log(res)
       if(res.data.success===true){
           setdata(res.data.message)
       }
