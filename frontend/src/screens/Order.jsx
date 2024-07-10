@@ -67,26 +67,20 @@ function Order() {
    
     },[id])
     const getdollar=async()=>{
-      const {data:convert_API}=await axios.get("https://pro-shop-backend.vercel.app/api/config/exchange")
-      if(convert_API){
-        let myHeaders = new Headers();
-        
-        myHeaders.append("apikey",convert_API.split("=")[1]); 
-        
-        var requestOptions = {
-         method: 'GET',
-         redirect: 'follow',
-         headers: myHeaders
-        };
-        
-        fetch(`https://api.apilayer.com/exchangerates_data/convert?to=usd&from=inr&amount=${data?.totalPrice}`,requestOptions)
-         .then(response => response.json())
-         .then(r => {
-           setdollar(Number((r.result).toFixed(2)))
-         }
-        
-         )
-         .catch(error =>{toast.error("something went wrong",{position:"bottom-right",theme:"colored"})});
+      try{
+
+      const {data}=await axios.post("https://pro-shop-backend.vercel.app/api/config/exchange",{amount:data?.totalPrice})
+      if( data.success===true){
+           setdollar(Number((data.message)))
+    
+      }else{
+        toast.error("something went wrong",{position:"bottom-right",theme:"colored"})
+      }
+    }
+  catch(error){
+    toast.error("something went wrong",{position:"bottom-right",theme:"colored"}
+
+    );
             }
       }
      
