@@ -68,10 +68,9 @@ function Order() {
     },[id])
     const getdollar=async()=>{
       try{
-
-      const {data}=await axios.post("https://pro-shop-backend.vercel.app/api/config/exchange",{amount:data?.totalPrice})
-      if( data.success===true){
-           setdollar(Number((data.message)))
+      const {data:resp}=await axios.post("https://pro-shop-backend.vercel.app/api/config/exchange",{amount:data?.totalPrice})
+      if( resp.success===true){
+           setdollar(Number((resp.message)))
     
       }else{
         toast.error("something went wrong",{position:"bottom-right",theme:"colored"})
