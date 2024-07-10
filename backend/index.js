@@ -28,11 +28,10 @@ app.get('/api/config/paypal', (req, res) =>
 app.post('/api/config/exchange', (req, res) =>{
   let myHeaders = new Headers();
         
-  myHeaders.append("apikey",process.env.EXCHANGE_API_KEY.split("=")[1]); 
+  myHeaders.append("apikey",process.env.EXCHANGE_API_KEY); 
   
   var requestOptions = {
    method: 'GET',
-   redirect: 'follow',
    headers: myHeaders
   };
   
