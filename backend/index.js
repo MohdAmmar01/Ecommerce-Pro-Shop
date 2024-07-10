@@ -25,9 +25,26 @@ app.use('/api/orders', orderRoutes)
 app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 )
-app.get('/api/config/exchange', (req, res) =>
-  res.send(process.env.EXCHANGE_API_KEY)
-)
+app.post('/api/config/exchange', (req, res) =>{
+  let myHeaders = new Headers();
+        
+  myHeaders.append("apikey",process.env.EXCHANGE_API_KEY.split("=")[1]); 
+  
+  var requestOptions = {
+   method: 'GET',
+   redirect: 'follow',
+   headers: myHeaders
+  };
+  
+  
+  fetch(`https://api.apilayer.com/exchangerates_data/convert?to=usd&from=inr&amount=${req?.body?.amount}`,requestOptions)
+   .then(response => response.json())
+   .then(r => {
+   return res.status(200).json({"success":true,"messge":Number((r.result).toFixed(2))})
+   }).catch((e)=>{
+      return res.status(200).json({"success":false,"message":"something went wrong ! "})
+   })
+})
 
   app.get('/', (req, res) => {
     res.send('API is running....')
