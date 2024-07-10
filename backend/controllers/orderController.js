@@ -41,7 +41,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
    await product.save();
    });
     const createdOrder = await order.save()
-    OrderConfirmEmail({from:req.user.email,address:createdOrder.shippingAddress})
+    // OrderConfirmEmail({from:req.user.email,address:createdOrder.shippingAddress})
 
     res.status(201).json({"success":true,"message":createdOrder})
   }

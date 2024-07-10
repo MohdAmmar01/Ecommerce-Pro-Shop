@@ -41,13 +41,13 @@ const authUser = asyncHandler(
     } else {
       const validate = await bcrypt.compare(req.body.password, user.password);
       if (validate) {
-      if(user.isVerified===false){
-        const code=crypto.randomBytes(32).toString('hex')
-      const u=  await User.updateOne({"email":req.body.email},{"VerficationCode":code })
-        sendEmail(req.body.email,code)
-        res.status(200).json({ success: false, message: "EMAIL IS SENT TO YOUR EMAILID , PLEASE VERIFY" });
+      // if(user.isVerified===false){
+      //   const code=crypto.randomBytes(32).toString('hex')
+      // const u=  await User.updateOne({"email":req.body.email},{"VerficationCode":code })
+      //   // sendEmail(req.body.email,code)
+      //   res.status(200).json({ success: false, message: "EMAIL IS SENT TO YOUR EMAILID , PLEASE VERIFY" });
 
-      }else{
+      // }else{
         const token = await jwt.sign({ _id: user._id }, process.env.SECRET_KEY, {
           expiresIn: "10hr",
         });
@@ -59,7 +59,7 @@ const authUser = asyncHandler(
            secure:true
         });
         res.status(200).json({ success: true, message: user, token: token });
-      } 
+      // } 
     }else {
         res.status(401);
         throw new Error("Invalid email or password");
@@ -100,7 +100,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
 
   const user = await newUser.save();
-  sendEmail(req.body.email,code)
+  // sendEmail(req.body.email,code)
   res.status(200).json({"success":true,"message":user})
 });
 
