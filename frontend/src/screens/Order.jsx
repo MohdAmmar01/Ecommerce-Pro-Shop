@@ -181,7 +181,7 @@ function Order() {
                 }).format(data.totalPrice)}
             </h2>
                                 {data.isPaid === false && data.user._id === users.userdata._id && sdk === true && dollar !== null && dollar !== "undefined" ? (
-                        <PayPalButton amount={dollar} onSuccess={paymentSuccessHandler} />
+                        <PayPalButton amount={dollar} onSuccess={paymentsuccesshandler} />
                     ) : null}
 
            {
