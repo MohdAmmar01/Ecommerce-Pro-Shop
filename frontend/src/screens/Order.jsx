@@ -68,6 +68,7 @@ function Order() {
     },[id])
     const getdollar=async()=>{
       try{
+        if(data!==null && data?.totalPrice){
       const {data:resp}=await axios.post("https://pro-shop-backend.vercel.app/api/config/exchange",{amount:data?.totalPrice})
       if( resp.success===true){
            setdollar(Number((resp.message)))
@@ -75,6 +76,7 @@ function Order() {
       }else{
         toast.error("something went wrong",{position:"bottom-right",theme:"colored"})
       }
+    }
     }
   catch(error){
     toast.error("something went wrong",{position:"bottom-right",theme:"colored"}
@@ -84,14 +86,11 @@ function Order() {
       }
      
     useEffect(()=>{
-      if(data!==null && dollar===null){
-
+      if(data!==null && dollar==null){
         getdollar()
       }
     },[data])
-    const paynow=async()=>{
-
-    }
+ 
     const shippedhandler=async()=>{
       const res=await axios.put(`https://pro-shop-backend.vercel.app/api/orders/${data._id}/shipped`)
       if(res.data.success===true){
