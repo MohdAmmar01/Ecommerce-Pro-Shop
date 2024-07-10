@@ -39,7 +39,7 @@ app.post('/api/config/exchange', (req, res) =>{
   fetch(`https://api.apilayer.com/exchangerates_data/convert?to=usd&from=inr&amount=${req?.body?.amount}`,requestOptions)
    .then(response => response.json())
    .then(r => {
-   return res.status(200).json({"success":true,"messge":Number((r.result).toFixed(2))})
+   return res.status(200).json({"success":true,"message":Number((r.result).toFixed(2))})
    }).catch((e)=>{
       return res.status(200).json({"success":false,"message":"something went wrong ! "})
    })
