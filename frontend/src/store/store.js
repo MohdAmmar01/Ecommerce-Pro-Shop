@@ -29,6 +29,7 @@ export default  configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+    devTools: false,
   
         
   });
