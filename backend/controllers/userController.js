@@ -5,13 +5,10 @@ const jwt =require( "jsonwebtoken")
 const Order =require( "../models/orderModel.js")
 const sendEmail =require( "../utils/VerifyEmail.js")
 const crypto =require( "crypto")
-// @desc    Auth user & get token
-// @route   POST /api/users/login
-// @access  Public
+
 const verifyEmail=asyncHandler(
   asyncHandler(async(req,res)=>{
    const user=await User.findOne({"VerficationCode":req.body.code});
-   console.log(user)
    if(user!==null){
     await User.updateOne({"VerficationCode":req.body.code},{"isVerified":true });
     const token = await jwt.sign({ _id: user._id }, process.env.SECRET_KEY, {
@@ -74,9 +71,7 @@ const logout = asyncHandler(
     res.status(200).json({"success":true ,"message":"logout successfully"})
       })
 );
-// @desc    Register a new user
-// @route   POST /api/users
-// @access  Public
+
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   if (!email || !name || !password) {
@@ -104,9 +99,6 @@ const registerUser = asyncHandler(async (req, res) => {
   res.status(200).json({"success":true,"message":user})
 });
 
-// @desc    Get user profile
-// @route   GET /api/users/profile
-// @access  Private
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
@@ -119,9 +111,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Update user profile
-// @route   PUT /api/users/profile
-// @access  Private
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
   if (user) {
@@ -145,17 +134,11 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Get all users
-// @route   GET /api/users
-// @access  Private/Admin
 const getUsers = asyncHandler(async (req, res) => {
   const users = await User.find({}).sort({ createdAt : -1});
   res.json({"success":true,"message":users});
 });
 
-// @desc    Delete user
-// @route   DELETE /api/users/:id
-// @access  Private/Admin
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   const orders=await Order.find({"user":req.params.id});
@@ -175,13 +158,8 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Get user by ID
-// @route   GET /api/users/:id
-// @access  Private/Admin
 const getUserById = asyncHandler(async (req, res) => {
-  console.log(req.params.id)
   const user = await User.findOne({"_id" : req.params.id}).select("-password");
- console.log(user)
   if (user) {
     res.json({"success":true,"message":user});
   } else {
@@ -190,9 +168,6 @@ const getUserById = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Update user
-// @route   PUT /api/users/:id
-// @access  Private/Admin
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 
